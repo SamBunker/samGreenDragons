@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package org.powbot.mobile.script;
+
+service LoggerService {
+
+  rpc GetLogs (GetLogsRequest) returns (stream LogMessage);
+
+}
+
+message GetLogsRequest {}
+
+message LogMessage {
+  string level = 1;
+  string message = 2;
+}

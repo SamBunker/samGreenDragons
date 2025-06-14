@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.powbot.proto.rt4";
+
+import "google/protobuf/any.proto";
+
+package rt4;
+
+service ItemPriceService {
+  rpc getItemPrice(GetItemPriceRequest) returns (GetItemPriceResponse);
+}
+
+message GetItemPriceRequest {
+  int32 id = 1;
+  string name = 2;
+}
+
+message GetItemPriceResponse {
+  int32 id = 1;
+  int32 price = 2;
+  string name = 3;
+}

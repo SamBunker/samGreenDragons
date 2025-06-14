@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package org.powbot.mobile.script;
+
+// The request message containing the script bytes.
+message ScheduleRequest {
+  bytes scriptBytes = 1;
+  string scheduleJson = 2;
+  string accountName = 3;
+}
+
+// The response message containing the result
+message ScheduleReply {
+  string message = 1;
+}
+
+// The Local script uploader service.
+service LocalScheduleUploader {
+  // Allows to upload a script
+  rpc start (ScheduleRequest) returns (ScheduleReply);
+}

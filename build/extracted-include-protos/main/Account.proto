@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.powbot.proto.script";
+option go_package = "./generated";
+
+service AccountService {
+  rpc Login(LoginRequest) returns (LoginResponse);
+}
+
+message LoginRequest {
+    optional string username = 1;
+    optional string password = 2;
+    optional string token = 3;
+}
+
+message LoginResponse {
+    UserAccount account = 1;
+}
+
+message UserAccount {
+    string id = 1;
+    repeated int32 userGroupIds = 2;
+    string username = 3;
+    string email = 4;
+    int64 balanceHeld = 5;
+    int64 balance = 6;
+}

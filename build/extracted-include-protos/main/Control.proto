@@ -1,0 +1,185 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.powbot.proto.rt4";
+
+import "google/protobuf/any.proto";
+import "google/protobuf/empty.proto";
+
+package control;
+
+service ControlService {
+  rpc createInstance(CreateInstanceRequest) returns (BotInstance);
+  rpc updateInstance(UpdateInstanceRequest) returns (BotInstance);
+  rpc fetchCommands(FetchCommandsRequest) returns (BotCommand);
+  rpc startScriptSession(StartScriptSessionRequest) returns (ScriptSession);
+  rpc updateScriptSession(UpdateScriptSessionRequest) returns (ScriptSession);
+  rpc getSessionConfig(GetSessionConfigRequest) returns (ScriptSessionConfig);
+  rpc getNextTask(GetNextTaskRequest) returns (Task);
+  rpc markTaskProcessed(Task) returns (Task);
+  rpc retrieveFips(FetchFipsRequest) returns (FetchFipsResponse);
+  rpc canRunLocalScript(CanRunLocalScriptRequest) returns (CanRunLocalScriptResponse);
+  rpc getState(GetStateRequest) returns (GetStateResponse);
+}
+
+message CanRunLocalScriptRequest {
+  string botInstanceId = 1;
+}
+
+message CanRunLocalScriptResponse {
+  bool canRun = 1;
+}
+
+message Response {
+  bool success = 1;
+}
+
+message FetchFipsRequest {
+  string rsAccountSha = 1;
+  int32 period = 2;
+}
+
+message FetchFipsResponse {
+  repeated Fips alertness = 1;
+  repeated Fips fatigue = 2;
+  int32 period = 3;
+}
+
+message Fips {
+  int64 start = 1;
+  float value = 2;
+}
+
+enum ClientType {
+  Desktop = 0;
+  Mobile = 1;
+}
+message CreateInstanceRequest {
+  string dsk = 1;
+  string sessionId = 2;
+  ClientType clientType = 3;
+  string clientVersion = 4;
+}
+
+enum BotStatus {
+  Idle = 0;
+  Running = 1;
+  Paused = 2;
+  Terminated = 3;
+}
+
+message UpdateInstanceRequest {
+  string sessionId = 1;
+  string scriptId = 2;
+  string scriptName = 3;
+  bool usingBreaks = 4;
+  int64 botRuntime = 5;
+  int64 scriptRuntime = 6;
+  bool usingLogin = 7;
+  BotStatus status = 8;
+  string screenshot = 9;
+  ClientType clientType = 10;
+  string clientVersion = 11;
+  string dsk = 12;
+  string rsAccountSha = 13;
+
+  map<string, int32> expGained = 14;
+  map<string, int32> levelsGained = 15;
+  map<string, int32> itemsGained = 16;
+}
+
+message FetchCommandsRequest {
+  string sessionId = 1;
+}
+
+message StartScriptSessionRequest {
+  string sessionId = 1;
+  string scriptId = 2;
+  string scriptName = 3;
+  string rsAccountId = 4;
+}
+
+message UpdateScriptSessionRequest {
+  string sessionId = 1;
+  int32 world = 2;
+  int32 x = 3;
+  int32 y = 4;
+  int32 plane = 5;
+  map<int32, int32> expChanges = 6;
+  map<int32, int32> levelChanges = 7;
+  string scriptSessionId = 8;
+}
+
+message GetSessionConfigRequest {
+  string sessionId = 1;
+}
+
+message GetNextTaskRequest {
+  string sessionId = 1;
+}
+
+message BotInstance {
+  string id = 1;
+  BotStatus status = 2;
+  Product product = 3;
+  repeated Task unprocessedTasks = 4;
+  int64 createdAt = 5;
+  int64 updatedAt = 6;
+
+  bool outOfTokens = 7;
+  string sessionId = 8;
+}
+
+enum TaskType {
+  StartScript = 0;
+  PauseScript = 1;
+  ResumeScript = 2;
+  StopScript = 3;
+}
+
+message Task {
+  string id = 1;
+  TaskType type = 2;
+  Product product = 3;
+  RSAccount rsAccount = 4;
+  string config = 5;
+  bool processed = 6;
+}
+
+message Product {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message BotCommand {
+  string command = 1;
+}
+
+message ScriptSession {
+  string id = 1;
+  string botInstanceId = 2;
+  Product product = 3;
+  int64 createdAt = 4;
+  int64 updatedAt = 5;
+}
+
+message ScriptSessionConfig {
+  bool sendScreenshots = 1;
+}
+
+message RSAccount {
+  string id = 1;
+  string nickname = 2;
+}
+
+message GetStateRequest {
+
+}
+
+message GetStateResponse {
+  int64 totalRunningInstances = 1;
+  int64 totalAllowedInstances = 2;
+  int64 checkedAt = 3;
+  string signature = 4;
+}

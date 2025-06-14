@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package org.powbot.mobile.script;
+
+service AccountService {
+
+  rpc GetAccounts (GetAccountsRequest) returns (GetAccountsResponse);
+
+  rpc SetActiveAccount (SetActiveAccountRequest) returns (SetActiveAccountResponse);
+
+}
+
+message RSAccount {
+  string username = 1;
+  string nickname = 2;
+}
+
+message GetAccountsRequest {}
+
+message GetAccountsResponse {
+  bool success = 1;
+  string message = 2;
+  repeated RSAccount accounts = 3;
+}
+
+message SetActiveAccountRequest {
+  string username = 1;
+}
+
+message SetActiveAccountResponse {
+  bool success = 1;
+  string message = 2;
+}
