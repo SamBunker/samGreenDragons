@@ -12,4 +12,7 @@ public class Variables {
     //Strings
     public String currentTask = "Idle";
 
+
+
+
 }

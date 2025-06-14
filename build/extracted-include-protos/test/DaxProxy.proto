@@ -16,6 +16,10 @@ message DaxRequest {
   string url = 1;
   string body = 2;
   string method = 3;
+  string scriptId = 4;
+  string scriptName = 5;
+  string botInstanceId = 6;
+  string rsnSha = 7;
 }
 
 message DaxResponse {
