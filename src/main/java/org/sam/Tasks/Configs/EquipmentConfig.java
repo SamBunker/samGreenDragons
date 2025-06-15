@@ -1,19 +1,17 @@
 package org.sam.Tasks.Configs;
 
-import org.powbot.api.rt4.stream.item.EquipmentItemStream;
-import org.powbot.api.rt4.stream.item.InventoryItemStream;
-import org.powbot.api.rt4.stream.item.ItemStream;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
-import java.util.List;
 
 public class EquipmentConfig {
-    private final ItemStream<EquipmentItemStream> equipmentStream;
+    private final Set<Integer> equipmentStream;
 
-    public EquipmentConfig(ItemStream<EquipmentItemStream> equipmentStream) {
+    public EquipmentConfig(Set<Integer> equipmentStream) {
         this.equipmentStream = equipmentStream;
     }
 
-    public ItemStream<EquipmentItemStream> equipmentStream() {
+    public Set<Integer> equipmentStream() {
         return equipmentStream;
     }
 }

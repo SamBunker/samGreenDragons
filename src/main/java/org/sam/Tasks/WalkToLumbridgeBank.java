@@ -3,6 +3,7 @@ package org.sam.Tasks;
 import org.powbot.api.Condition;
 import org.powbot.api.Locatable;
 import org.powbot.api.Random;
+import org.powbot.api.Tile;
 import org.powbot.api.rt4.*;
 import org.sam.Constants;
 import org.sam.Task;
@@ -19,29 +20,28 @@ public class WalkToLumbridgeBank extends Task {
 
     @Override
     public boolean activate() {
-        return (Constants.LUMBRIDGE_AREA.contains(Players.local()));
+        return (Constants.LUMBRIDGE_AREA_BOTTOM.contains(Players.local()) && !Constants.LUMBRIDGE_AREA_TOP.contains(Players.local()));
     }
 
     @Override
     public void execute() {
-        GameObject stairs = Objects.stream().id(Constants.LUMBRIDGE_STAIRS_ID).nearest().first();
-
-        if (stairs.valid()) {
-            if (!stairs.inViewport()) {
-                Camera.turnTo(stairs);
-                Movement.walkTo(stairs);
+        if (Constants.LUMBRIDGE_AREA_BOTTOM.contains(Players.local())) {
+            GameObject stairs = Objects.stream().id(Constants.LUMBRIDGE_STAIRS_ID).nearest().first();
+            if (!stairs.valid() || !stairs.inViewport()) {
+                Movement.step(Constants.LUMBRIDGE_STAIRS);
                 return;
             }
             if (stairs.inViewport() && stairs.reachable()) {
                 if (stairs.interact("Top-floor")) {
                     Condition.wait(() -> stairs.getTile().distanceTo(Players.local()) < 2, 80, 100);
                     Condition.sleep(Random.nextInt(85, 112));
+                    return;
                 }
             }
         }
-        if (Bank.nearest().reachable()) {
-            Movement.moveTo(Bank.nearest());
-            Condition.wait(() -> Bank.nearest().tile().distanceTo(Players.local().tile()) < 3, 80, 100);
+        if (Constants.LUMBRIDGE_AREA_TOP.contains(Players.local())) {
+            Movement.step(Constants.LUMBRIDGE_BANK_AREA.getRandomTile());
+            Condition.wait(() -> Constants.LUMBRIDGE_BANK_AREA.contains(Players.local()), 80, 100);
         }
     }
 }

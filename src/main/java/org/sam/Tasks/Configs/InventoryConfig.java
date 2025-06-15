@@ -1,18 +1,16 @@
 package org.sam.Tasks.Configs;
 
-import org.powbot.api.rt4.Inventory;
-import org.powbot.api.rt4.stream.item.InventoryItemStream;
-import org.powbot.api.rt4.stream.item.ItemStream;
-
+import java.util.Collections;
+import java.util.Map;
 
 public class InventoryConfig {
-    private final ItemStream<InventoryItemStream> inventoryStream;
+    private final Map<Integer, Integer> inventoryStream;
 
-    public InventoryConfig(ItemStream<InventoryItemStream> inventoryStream) {
+    public InventoryConfig(Map<Integer, Integer> inventoryStream) {
         this.inventoryStream = inventoryStream;
     }
 
-    public ItemStream<InventoryItemStream> getInventoryStream() {
+    public Map<Integer, Integer> getInventoryStream() {
         return inventoryStream;
     }
 }

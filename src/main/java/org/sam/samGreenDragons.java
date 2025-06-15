@@ -9,6 +9,9 @@ import org.sam.Tasks.*;
 import org.sam.Tasks.Configs.EquipmentConfig;
 import org.sam.Tasks.Configs.InventoryConfig;
 
+import java.util.Map;
+import java.util.Set;
+
 
 @ScriptConfiguration.List({
         @ScriptConfiguration(
@@ -35,8 +38,11 @@ public class samGreenDragons extends AbstractScript {
         new ScriptUploader().uploadAndStart("Sam Green Dragons", "", "R52T90A6VCM", true, false);
     }
 
+    Map<Integer, Integer> equipmentMap = getOption("Equipment");
+    Set<Integer> itemIds = equipmentMap.keySet(); // Extract only the item IDs
+    EquipmentConfig equipmentConfig = new EquipmentConfig(itemIds);
+
     InventoryConfig inventoryConfig;
-    EquipmentConfig equipmentConfig;
 
     Variables vars = new Variables();
     Constants constants = new Constants();
@@ -51,6 +57,10 @@ public class samGreenDragons extends AbstractScript {
         );
 
         constants.TASK_LIST.add(new Running(this));
+        constants.TASK_LIST.add(new WalkToLumbridgeBank(this));
+        constants.TASK_LIST.add(new OpenBank(this, inventoryConfig, equipmentConfig));
+        constants.TASK_LIST.add(new Resupply(this, inventoryConfig, equipmentConfig));
+        constants.TASK_LIST.add(new TeleportToFerox(this, inventoryConfig, equipmentConfig));
 
         addPaint(
                 PaintBuilder.newBuilder()
