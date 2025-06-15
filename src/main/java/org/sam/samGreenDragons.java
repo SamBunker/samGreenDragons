@@ -1,5 +1,7 @@
 package org.sam;
 import org.powbot.api.Color;
+import org.powbot.api.rt4.Equipment;
+import org.powbot.api.rt4.Item;
 import org.powbot.api.rt4.walking.model.Skill;
 import org.powbot.api.script.*;
 import org.powbot.api.script.paint.PaintBuilder;
@@ -10,7 +12,8 @@ import org.sam.Tasks.Configs.EquipmentConfig;
 import org.sam.Tasks.Configs.InventoryConfig;
 
 import java.util.Map;
-import java.util.Set;
+
+import static org.sam.Functions.equipmentConfig;
 
 
 @ScriptConfiguration.List({
@@ -37,10 +40,10 @@ public class samGreenDragons extends AbstractScript {
     public static void main(String[] args) {
         new ScriptUploader().uploadAndStart("Sam Green Dragons", "", "R52T90A6VCM", true, false);
     }
-
-    Map<Integer, Integer> equipmentMap = getOption("Equipment");
-    Set<Integer> itemIds = equipmentMap.keySet(); // Extract only the item IDs
-    EquipmentConfig equipmentConfig = new EquipmentConfig(itemIds);
+//
+//    Map<Integer, Integer> equipmentMap = getOption("Equipment");
+//    Set<Integer> itemIds = equipmentMap.keySet(); // Extract only the item IDs
+//    EquipmentConfig equipmentConfig = new EquipmentConfig(itemIds, );
 
     InventoryConfig inventoryConfig;
 
@@ -52,9 +55,12 @@ public class samGreenDragons extends AbstractScript {
         inventoryConfig = new InventoryConfig(
                 getOption("Inventory")
         );
-        equipmentConfig = new EquipmentConfig(
-                getOption("Equipment")
-        );
+        //Map<Integer, Integer> equipment = getOption("Equipment"); // This is your Map<Integer, Integer>
+        // Get the arrow/bolt in the quiver slot
+        Item quiverItem = Equipment.itemAt(Equipment.Slot.QUIVER);
+        int quiverStackSize = quiverItem.valid() ? quiverItem.stackSize() : 0;
+
+        equipmentConfig = new EquipmentConfig(getOption("Equipment"), quiverStackSize);
 
         constants.TASK_LIST.add(new Running(this));
         constants.TASK_LIST.add(new WalkToLumbridgeBank(this));

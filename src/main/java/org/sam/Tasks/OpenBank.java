@@ -24,27 +24,30 @@ public class OpenBank extends Task {
 
     @Override
     public boolean activate() {
-        return !Bank.open()
+        return !Bank.opened()
                 && (Constants.LUMBRIDGE_AREA_TOP.contains(Players.local()) || Constants.FEROX_ENCLAVE.contains(Players.local()))
-                && (!Functions.equipmentMatchesConfig(equipmentConfig)
+                && (Functions.missingEquipment(equipmentConfig.equipmentStream()).length > 0
                 || !Functions.inventoryMatchesConfig(inventoryconfig));
     }
 
     @Override
     public void execute() {
-        if (Constants.LUMBRIDGE_AREA_TOP.contains(Players.local())) {
-            GameObject bank = Objects.stream().id(Constants.LUMBRIDGE_BANK).nearest().first();
-            if (!bank.inViewport()) {
-                Camera.turnTo(bank);
-                Movement.step(bank);
-                Condition.wait(() -> bank.tile().distanceTo(Players.local().tile()) < 4, 80, 100);
-            } else {
-                bank.interact("Bank");
-                return;
+        if ((Functions.missingEquipment(equipmentConfig.equipmentStream()).length > 0 || !Functions.inventoryMatchesConfig(inventoryconfig))) {
+            if (Constants.LUMBRIDGE_AREA_TOP.contains(Players.local())) {
+                GameObject bank = Objects.stream().id(Constants.LUMBRIDGE_BANK).nearest().first();
+                if (!bank.inViewport()) {
+                    Camera.turnTo(bank);
+                    Movement.step(bank);
+                    Condition.wait(() -> bank.tile().distanceTo(Players.local().tile()) < 4, 80, 100);
+                } else {
+                    bank.interact("Bank");
+                    Condition.wait(Bank::opened, 100, 100);
+                    return;
+                }
             }
-        }
-        if (Constants.FEROX_ENCLAVE.contains(Players.local())) {
-            GameObject bank = Objects.stream().id(Constants.LUMBRIDGE_BANK).nearest().first();
+            if (Constants.FEROX_ENCLAVE.contains(Players.local())) {
+                GameObject bank = Objects.stream().id(Constants.LUMBRIDGE_BANK).nearest().first();
+            }
         }
     }
 }
