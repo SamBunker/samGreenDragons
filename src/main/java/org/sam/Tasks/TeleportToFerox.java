@@ -28,7 +28,7 @@ public class TeleportToFerox extends Task {
 
     @Override
     public boolean activate() {
-        return (Functions.getEquipmentDifference(equipmentConfig).isEmpty()
+        return (Functions.missingEquipment(equipmentConfig.equipmentStream()).length > 0
                 && Functions.getInventoryDifference(inventoryconfig).isEmpty())
                 && Constants.LUMBRIDGE_AREA_TOP.contains(Players.local())
                 && !Constants.FEROX_ENCLAVE.contains(Players.local());

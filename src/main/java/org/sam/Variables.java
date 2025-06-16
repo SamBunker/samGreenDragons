@@ -12,6 +12,9 @@ public class Variables {
     //Strings
     public String currentTask = "Idle";
 
+    public boolean gearEquipped = false;
+    public boolean gearWithdrawn = false;
+
 
 
 
