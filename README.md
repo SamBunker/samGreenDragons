@@ -8,11 +8,13 @@ June 14th, 2025
 
 
 ## Script Construction 👷‍♂️
-- Death Handler
+- Death Handler (retrieving items from death, regearing)
 - Inventory and Equipment Manager
-- PKer Handler
-- Combat Handler
+- PKer Handler (Basic Anti-Pk)
+- Combat Handler (Range & Melee Support)
+- Various Methods for Antifire
 - Loot Handler
+
 
 ## Script Completion Percentage 💯
 ![Completion Percentage](https://img.shields.io/badge/8-100-32a852?style=for-the-badge&logoColor=white)
