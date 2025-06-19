@@ -4,8 +4,6 @@ import org.powbot.api.Condition;
 import org.powbot.api.Random;
 import org.powbot.api.rt4.*;
 import org.sam.Constants;
-import org.sam.Functions;
-import org.sam.Task;
 import org.sam.samGreenDragons;
 
 public class UsePool extends Task {

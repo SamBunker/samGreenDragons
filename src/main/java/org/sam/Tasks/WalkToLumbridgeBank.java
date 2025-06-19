@@ -1,12 +1,9 @@
 package org.sam.Tasks;
 
 import org.powbot.api.Condition;
-import org.powbot.api.Locatable;
 import org.powbot.api.Random;
-import org.powbot.api.Tile;
 import org.powbot.api.rt4.*;
 import org.sam.Constants;
-import org.sam.Task;
 import org.sam.samGreenDragons;
 
 public class WalkToLumbridgeBank extends Task {

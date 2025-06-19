@@ -1,8 +1,8 @@
-package org.sam;
+package org.sam.Utils;
 
 import org.powbot.api.rt4.*;
-import org.sam.Tasks.Configs.EquipmentConfig;
-import org.sam.Tasks.Configs.InventoryConfig;
+import org.sam.Configs.EquipmentConfig;
+import org.sam.Configs.InventoryConfig;
 
 import java.util.*;
 

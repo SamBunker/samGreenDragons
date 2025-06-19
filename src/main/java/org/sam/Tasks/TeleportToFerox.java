@@ -1,16 +1,13 @@
 package org.sam.Tasks;
 
 import org.powbot.api.Condition;
-import org.powbot.api.Random;
 import org.powbot.api.rt4.Inventory;
 import org.powbot.api.rt4.Item;
-import org.powbot.api.rt4.Movement;
 import org.powbot.api.rt4.Players;
 import org.sam.Constants;
-import org.sam.Functions;
-import org.sam.Task;
-import org.sam.Tasks.Configs.EquipmentConfig;
-import org.sam.Tasks.Configs.InventoryConfig;
+import org.sam.Utils.Functions;
+import org.sam.Configs.EquipmentConfig;
+import org.sam.Configs.InventoryConfig;
 import org.sam.samGreenDragons;
 
 public class TeleportToFerox extends Task {

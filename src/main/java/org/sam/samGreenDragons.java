@@ -5,16 +5,15 @@ import org.powbot.api.rt4.Item;
 import org.powbot.api.rt4.walking.model.Skill;
 import org.powbot.api.script.*;
 import org.powbot.api.script.paint.PaintBuilder;
-import org.powbot.mobile.script.ScriptManager;
 import org.powbot.mobile.service.ScriptUploader;
+import org.sam.Branches.Tree;
 import org.sam.Tasks.*;
-import org.sam.Tasks.Configs.EquipmentConfig;
-import org.sam.Tasks.Configs.InventoryConfig;
+import org.sam.Configs.EquipmentConfig;
+import org.sam.Configs.InventoryConfig;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import static org.sam.Functions.equipmentConfig;
+import static org.sam.Utils.Functions.equipmentConfig;
 
 
 @ScriptConfiguration.List({
@@ -41,6 +40,9 @@ public class samGreenDragons extends AbstractScript {
     public static void main(String[] args) {
         new ScriptUploader().uploadAndStart("Sam Green Dragons", "", "R52T90A6VCM", true, false);
     }
+
+    private Branch tree;
+
 //
 //    Map<Integer, Integer> equipmentMap = getOption("Equipment");
 //    Set<Integer> itemIds = equipmentMap.keySet(); // Extract only the item IDs
@@ -53,6 +55,7 @@ public class samGreenDragons extends AbstractScript {
 
     @Override
     public void onStart() {
+        tree = new Tree();
         inventoryConfig = new InventoryConfig(
                 getOption("Inventory")
         );
@@ -90,15 +93,18 @@ public class samGreenDragons extends AbstractScript {
 
     @Override
     public void poll() {
-        for (Task task : constants.TASK_LIST) {
-            if (task.activate()) {
-                vars.currentTask = task.name;
-                task.execute();
+        if (tree != null && tree.validate()) {
 
-                if (ScriptManager.INSTANCE.isStopping()) {
-                    break;
-                }
-            }
         }
+//        for (Task task : constants.TASK_LIST) {
+//            if (task.activate()) {
+//                vars.currentTask = task.name;
+//                task.execute();
+//
+//                if (ScriptManager.INSTANCE.isStopping()) {
+//                    break;
+//                }
+//            }
+//        }
     }
 }

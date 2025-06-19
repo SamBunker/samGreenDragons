@@ -2,19 +2,12 @@ package org.sam.Tasks;
 
 import org.powbot.api.Condition;
 import org.powbot.api.Random;
-import org.powbot.api.rt4.Bank;
 import org.powbot.api.rt4.Inventory;
 import org.powbot.api.rt4.Item;
-import org.powbot.api.rt4.Players;
 import org.sam.*;
-import org.sam.Tasks.Configs.EquipmentConfig;
-import org.sam.Tasks.Configs.InventoryConfig;
+import org.sam.Configs.EquipmentConfig;
 
 import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static org.sam.Functions.inventoryConfig;
 
 public class Equip extends Task {
     samGreenDragons main;

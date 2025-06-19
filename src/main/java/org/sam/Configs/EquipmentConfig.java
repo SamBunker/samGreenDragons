@@ -1,7 +1,6 @@
-package org.sam.Tasks.Configs;
+package org.sam.Configs;
 
 import java.util.Map;
-import java.util.Set;
 
 
 public class EquipmentConfig {

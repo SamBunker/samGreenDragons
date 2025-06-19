@@ -3,9 +3,8 @@ package org.sam.Tasks;
 import org.powbot.api.Condition;
 import org.powbot.api.rt4.*;
 import org.sam.Constants;
-import org.sam.Task;
-import org.sam.Functions;
-import org.sam.Tasks.Configs.InventoryConfig;
+import org.sam.Utils.Functions;
+import org.sam.Configs.InventoryConfig;
 import org.sam.samGreenDragons;
 
 import java.util.Map;

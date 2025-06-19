@@ -1,11 +1,9 @@
 package org.sam.Tasks;
 
 import org.powbot.api.Condition;
-import org.powbot.api.Random;
 import org.powbot.api.rt4.Movement;
 import org.powbot.api.rt4.Players;
 import org.sam.Constants;
-import org.sam.Task;
 import org.sam.samGreenDragons;
 
 public class WalkToFeroxBank extends Task {

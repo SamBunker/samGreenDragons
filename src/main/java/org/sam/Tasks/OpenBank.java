@@ -4,8 +4,9 @@ import org.powbot.api.Condition;
 import org.powbot.api.rt4.*;
 import org.sam.*;
 import org.sam.Constants;
-import org.sam.Tasks.Configs.EquipmentConfig;
-import org.sam.Tasks.Configs.InventoryConfig;
+import org.sam.Configs.EquipmentConfig;
+import org.sam.Configs.InventoryConfig;
+import org.sam.Utils.Functions;
 
 public class OpenBank extends Task {
     samGreenDragons main;

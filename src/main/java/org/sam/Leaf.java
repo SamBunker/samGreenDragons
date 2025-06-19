@@ -1,13 +1,13 @@
 package org.sam;
 
-public abstract class Task {
+public abstract class Leaf {
     protected String name;
 
-    public Task() {
+    public Leaf() {
         super();
         name = "Un-named";
     }
 
-    public abstract boolean activate();
+    public abstract boolean validate();
     public abstract void execute();
 }

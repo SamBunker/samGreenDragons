@@ -1,4 +1,4 @@
-package org.sam.Tasks.Configs;
+package org.sam.Configs;
 
 import java.util.Map;
 
